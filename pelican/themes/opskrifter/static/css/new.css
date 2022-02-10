@@ -1,0 +1,73 @@
+@import url("main.css");
+
+header {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+    header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+
+    header .title {
+        background-color: #d3b437;
+        padding: 10px 0;
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        margin: auto;
+        opacity: 0.9;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        font-style: italic;
+    }
+
+    header .title h1 {
+
+    }
+
+    header .title ul {
+        list-style: none;
+        margin: 0;
+    }
+
+    header .title ul li {
+        display: inline;
+        padding: 0 5px;
+    }
+
+    header .title ul li a {
+        color: white;
+    }
+
+section.recipe {
+    max-width: none;
+    display: flex;
+    padding-top: 30px;
+}
+    section.recipe aside {
+        min-width: 250px;
+        padding: 0 0 0 30px;
+        border-right: #dedede solid 1px;
+    }
+    section.recipe article {
+        padding: 0 30px 0 60px;
+        counter-reset: paragraph;
+    }
+    section.recipe article p::before {
+        counter-increment: paragraph;
+        content: counter(paragraph) ". ";
+        position: absolute;
+        left: -30px;
+        color: gray;
+    }
+
+    section.recipe article p {
+        position: relative;
+    }

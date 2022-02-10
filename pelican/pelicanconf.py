@@ -28,3 +28,4 @@ DEFAULT_PAGINATION = False
 
 DEFAULT_DATE = 'fs'
 THEME = 'themes/opskrifter'
+CSS_FILE = 'new.css'

@@ -3,20 +3,33 @@
 {% block title %}{{ article.title|striptags }}{% endblock %}
 
 {% block content %}
-<section id="content" class="body">
+
+  <header>
+    {% if article.metadata['image'] %}
+      <img src="/{{ article.metadata['image']}}" />
+    {% endif %}
+    <div class="title">
+      <h1>{{ article.title }}</h1>
+      {% if article.tags %}
+        <ul>
+          {% for tag in article.tags %}
+            <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </header>
+
+<section class="recipe">
+  <aside>
+    <ul>
+      {% for ingredient in article.metadata['ingredients'].split(';') %}
+      <li>{{ ingredient }}</li>
+      {% endfor %}
+    </ul>
+  </aside>
   <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
-           title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h1>
-    </header>
-
-    <div class="entry-content">
-      {% include 'article_infos.html' %}
-      #{{article.metadata['image'] }}#
-      {{ article.content }}
-    </div><!-- /.entry-content -->
-
+    {{ article.content }}
   </article>
 </section>
 {% endblock %}

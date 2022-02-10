@@ -12,7 +12,8 @@ IMAGE_DIR = 'pelican/content'
 def _purge_directory(directory: str) -> None:
     for dirname, _, filenames in list(os.walk(directory))[::-1]:
         for filename in filenames:
-            os.remove(os.path.join(dirname, filename))
+            if not filename.startswith('.'):
+                os.remove(os.path.join(dirname, filename))
         os.rmdir(dirname)
 
 
@@ -75,34 +76,32 @@ def main():
                     )
                     metadata['Image'] = os.path.basename(imgpath)
 
+                if recipe.ingredients:
+                    ingr = []
+                    for ingredient in recipe.ingredients:
+                        if ingredient.quantity:
+                            ingr.append(
+                                f"{ingredient.quantity.amount} "
+                                f"{ingredient.quantity.unit or ''}"
+                                f" {ingredient.name}"
+                            )
+                        else:
+                            ingr.append(ingredient.name)
+                    if ingr:
+                        metadata['Ingredients'] = ';'.join(ingr)
+
                 if metadata:
                     fh.write("---\n")
                     for key, value in metadata.items():
                         fh.write(f"{key}: {value}\n")
                     fh.write("---\n")
 
-                if 'Image' in metadata:
-                    fh.write(f"\n![Photo]({{attach}}{metadata['Image']})\n")
-                if recipe.ingredients:
-                    fh.write("\n### Ingredienser\n")
-                    for ingredient in recipe.ingredients:
-                        if ingredient.quantity:
-                            fh.write(
-                                f" * {ingredient.quantity.amount} "
-                                f"{ingredient.quantity.unit or ''}"
-                                f" {ingredient.name}\n"
-                            )
-                        else:
-                            fh.write(f" * {ingredient.name}\n")
-
                 # Clean steps for comments
                 steps = [s.split('--')[0].strip() for s in recipe.steps]
                 steps = [s for s in steps if s]
 
-                if steps:
-                    fh.write("""\n### Opskrift\n""")
-                    for step in steps:
-                        fh.write(f"\n{step}\n")
+                for step in steps:
+                    fh.write(f"\n{step}\n")
 
 
 # TODO: cooklang bugs
