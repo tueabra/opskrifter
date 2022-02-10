@@ -81,8 +81,6 @@ def main():
                         fh.write(f"{key}: {value}\n")
                     fh.write("---\n")
 
-                #for key, value in recipe.metadata.items():
-                #    fh.write(f"\n{key.capitalize()}: **{value}**\n")
                 if 'Image' in metadata:
                     fh.write(f"\n![Photo]({{attach}}{metadata['Image']})\n")
                 if recipe.ingredients:
