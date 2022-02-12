@@ -6,7 +6,7 @@ from cooklang import Recipe
 
 SOURCE_DIR = 'src'
 BUILD_DIR = 'pelican/content'
-IMAGE_DIR = 'pelican/content'
+IMAGE_DIR = 'pelican/content/images'
 
 
 def _purge_directory(directory: str) -> None:
@@ -14,7 +14,8 @@ def _purge_directory(directory: str) -> None:
         for filename in filenames:
             if not filename.startswith('.'):
                 os.remove(os.path.join(dirname, filename))
-        os.rmdir(dirname)
+        if dirname != directory:
+            os.rmdir(dirname)
 
 
 def _ensure_directory(directory: str) -> None:
@@ -74,7 +75,7 @@ def main():
                         src.replace('.cook', '.jpg'),
                         imagetarget,
                     )
-                    metadata['Image'] = os.path.basename(imgpath)
+                    metadata['Image'] = imgpath.replace(SOURCE_DIR, '/images')
 
                 if recipe.ingredients:
                     ingr = []
