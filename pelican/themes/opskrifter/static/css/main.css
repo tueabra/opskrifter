@@ -1,20 +1,10 @@
-/*
-	Name: Smashing HTML5
-	Date: July 2009
-	Description: Sample layout for HTML5 and CSS3 goodness.
-	Version: 1.0
-	License: MIT <https://opensource.org/licenses/MIT>
-	Licensed by: Smashing Media GmbH <https://www.smashingmagazine.com/>
-	Original author: Enrique Ramírez <http://enrique-ramirez.com/>
-*/
-
 /* Imports */
 @import url("reset.css");
 
 /***** Global *****/
 /* Body */
 body {
-    background: #F5F4EF;
+    background: #f5f5f5;
     color: #000305;
     font-size: 87.5%; /* Base font size: 14px */
     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -25,7 +15,10 @@ body {
 }
 
 /* Headings */
-h1 {font-size: 2em }
+h1 {
+	font-size: 2em;
+	text-transform: uppercase;
+}
 h2 {font-size: 1.571em}	/* 22px */
 h3 {font-size: 1.429em}	/* 20px */
 h4 {font-size: 1.286em}	/* 18px */
@@ -53,12 +46,7 @@ a:hover, a:active {
 	text-decoration: none;
 }
 
-h1 a:hover {
-    background-color: inherit
-}
-
 /* Paragraphs */
-div.line-block,
 p { margin-top: 1em;
     margin-bottom: 1em;}
 
@@ -78,45 +66,6 @@ ol {
 
 li { margin-top: 0.5em;
      margin-bottom: 1em; }
-
-.post-info {
-    float:right;
-    margin:10px;
-    padding:5px;
-}
-
-.post-info p{
-    margin-top: 1px;
-    margin-bottom: 1px;
-}
-
-.readmore { float: right }
-
-/* HTML5 tags */
-section, footer,
-aside, article, figure {
-	display: block;
-}
-
-/***** Layout *****/
-img { max-width: 100%; }
-img.right, figure.right, div.figure.align-right {
-    float: right;
-    margin: 0 0 2em 2em;
-}
-img.left, figure.left, div.figure.align-left {
-    float: left;
-    margin: 0 2em 2em 0;
-}
-
-/* .rst support */
-div.figure img, figure img {  /* to fill figure exactly */
-    max-width: 100%;
-}
-div.figure p.caption, figure p.caption { /* margin provided by figure */
-    margin-top: 0;
-    margin-bottom: 0;
-}
 
 /* Main Nav */
 nav {
@@ -147,49 +96,121 @@ nav .active a:link, nav .active a:visited {
 	text-shadow: none !important;
 }
 
-/*
-	Body
-*****************/
 section {
-	background: #fff;
-	margin-bottom: 2em;
-	overflow: hidden;
-	padding: 20px 20px;
-	max-width: 760px;
+	max-width: 1120px;
 	margin: 0 auto;
-
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
 }
 
-/***** Sections *****/
-/* Blog */
-.hentry {
-	display: block;
-	clear: both;
-	border-top: 1px solid #eee;
-	padding: 1.5em 0;
+header {
+    width: 100%;
+    height: 300px;
+    position: relative;
 }
-li:first-child .hentry, section > .hentry {border: 0; margin: 0;}
-section > .hentry {padding: 1em 0;}
-.hentry img{display : none ;}
+    header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
 
-.hentry .post-info * {font-style: normal;}
+    header .title {
+        background-color: #d3b437;
+        padding: 10px 0;
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        margin: auto;
+        opacity: 0.9;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        font-style: italic;
+    }
 
-	/* Content */
-	.hentry footer {margin-bottom: 2em;}
-	.hentry footer address {display: inline;}
-	#posts-list footer address {display: block;}
+    header .title ul {
+        list-style: none;
+        margin: 0;
+    }
 
-	/* Blog Index */
-	#posts-list {list-style: none; margin: 0;}
-	#posts-list .hentry {padding-left: 10px; position: relative;}
+    header .title ul li {
+        display: inline;
+        padding: 0 5px;
+    }
 
-	#posts-list footer {
-		left: 10px;
-		position: relative;
-        float: left;
-		top: 0.5em;
-		max-width: 190px;
-	}
+    header .title ul li a {
+        color: white;
+    }
+
+section.recipe {
+    display: flex;
+    padding-top: 30px;
+}
+    section.recipe aside {
+        min-width: 250px;
+        padding: 0 0 0 30px;
+        border-right: #dedede solid 1px;
+    }
+    section.recipe article {
+        padding: 0 30px 0 60px;
+        counter-reset: paragraph;
+        max-width: 700px;
+    }
+    section.recipe article p::before {
+        counter-increment: paragraph;
+        content: counter(paragraph) ". ";
+        position: absolute;
+        left: -30px;
+        color: gray;
+    }
+
+    section.recipe article p {
+        position: relative;
+    }
+
+#posts-list {
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+    #posts-list li {
+        display: flex;
+        height: 120px;
+        margin: 0;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    #posts-list li::after {
+        position: absolute;
+        bottom: -5px;
+        left: 80px;
+        right: 80px;
+        content: "";
+        border-bottom: #dedede solid 1px;
+    }
+    #posts-list li a {
+        display: flex;
+        flex-grow: 1;
+        text-decoration: none;
+    }
+    #posts-list li a:hover {
+        color: inherit;
+    }
+    #posts-list li a:hover h1 {
+        color: #d3b437;
+    }
+    #posts-list li a > img {
+        width: 25%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+    #posts-list li a > div {
+        flex-grow: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    #posts-list span {
+        flex-grow: 1;
+    }
