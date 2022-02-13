@@ -1,0 +1,216 @@
+/* Imports */
+@import url("reset.css");
+
+/***** Global *****/
+/* Body */
+body {
+    background: #f5f5f5;
+    color: #000305;
+    font-size: 87.5%; /* Base font size: 14px */
+    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    line-height: 1.429;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* Headings */
+h1 {
+	font-size: 2em;
+	text-transform: uppercase;
+}
+h2 {font-size: 1.571em}	/* 22px */
+h3 {font-size: 1.429em}	/* 20px */
+h4 {font-size: 1.286em}	/* 18px */
+h5 {font-size: 1.143em}	/* 16px */
+h6 {font-size: 1em}		/* 14px */
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 400;
+    font-family: Helvetica, Verdana;
+}
+
+h3, h4, h5, h6 { margin-top: .8em; }
+
+hr { border: 2px solid #EEEEEE; }
+
+/* Anchors */
+a {outline: 0;}
+a img {border: 0px; text-decoration: none;}
+a:link, a:visited {
+	color: inherit;
+	text-decoration: underline;
+}
+a:hover, a:active {
+	color: #999;
+	text-decoration: none;
+}
+
+/* Paragraphs */
+p { margin-top: 1em;
+    margin-bottom: 1em;}
+
+strong, b {font-weight: bold;}
+em, i {font-style: italic;}
+
+/* Lists */
+ul {
+	list-style: outside disc;
+	margin: 0em 0 0 1.5em;
+}
+
+ol {
+	list-style: outside decimal;
+	margin: 0em 0 0 1.5em;
+}
+
+li { margin-top: 0.5em;
+     margin-bottom: 1em; }
+
+/* Main Nav */
+nav {
+	background: #3f3826;
+	color: white;
+	font-size: 1.143em;
+	overflow: auto;
+	line-height: 30px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+nav ul {list-style: none; margin: 0 auto; max-width: 800px;}
+nav li {float: left; display: inline; margin: 0;}
+
+nav a:link, nav a:visited {
+	color: #fff;
+	display: inline-block;
+	height: 30px;
+	padding: 5px 1.5em;
+	text-decoration: none;
+}
+nav a:hover, nav a:active,
+nav .active a:link, nav .active a:visited {
+	background: black;
+	color: #fff;
+	text-shadow: none !important;
+}
+
+section {
+	max-width: 1120px;
+	margin: 0 auto;
+}
+
+header {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+    header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+
+    header .title {
+        background-color: #d3b437;
+        padding: 10px 0;
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        margin: auto;
+        opacity: 0.9;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        font-style: italic;
+    }
+
+    header .title ul {
+        list-style: none;
+        margin: 0;
+    }
+
+    header .title ul li {
+        display: inline;
+        padding: 0 5px;
+    }
+
+    header .title ul li a {
+        color: white;
+    }
+
+section.recipe {
+    display: flex;
+    padding-top: 30px;
+}
+    section.recipe aside {
+        min-width: 250px;
+        padding: 0 0 0 30px;
+        border-right: #dedede solid 1px;
+    }
+    section.recipe article {
+        padding: 0 30px 0 60px;
+        counter-reset: paragraph;
+        max-width: 700px;
+    }
+    section.recipe article p::before {
+        counter-increment: paragraph;
+        content: counter(paragraph) ". ";
+        position: absolute;
+        left: -30px;
+        color: gray;
+    }
+
+    section.recipe article p {
+        position: relative;
+    }
+
+#posts-list {
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+    #posts-list li {
+        display: flex;
+        height: 120px;
+        margin: 0;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    #posts-list li::after {
+        position: absolute;
+        bottom: -5px;
+        left: 80px;
+        right: 80px;
+        content: "";
+        border-bottom: #dedede solid 1px;
+    }
+    #posts-list li a {
+        display: flex;
+        flex-grow: 1;
+        text-decoration: none;
+    }
+    #posts-list li a:hover {
+        color: inherit;
+    }
+    #posts-list li a:hover h1 {
+        color: #d3b437;
+    }
+    #posts-list li a > img {
+        width: 25%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+    #posts-list li a > div {
+        flex-grow: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    #posts-list span {
+        flex-grow: 1;
+    }
