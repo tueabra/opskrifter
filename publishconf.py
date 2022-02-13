@@ -1,6 +1,6 @@
 AUTHOR = ''
 SITENAME = 'Opskrifter'
-SITEURL = 'opskrifter/'
+SITEURL = '/opskrifter/'
 
 PATH = 'content'
 
