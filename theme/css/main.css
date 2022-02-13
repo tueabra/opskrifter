@@ -115,7 +115,7 @@ header {
 
     header .title {
         background-color: #d3b437;
-        padding: 10px 0;
+        padding: 10px;
         position: absolute;
         bottom: -20px;
         left: 50%;
@@ -164,9 +164,12 @@ section.recipe {
         left: -30px;
         color: gray;
     }
-
     section.recipe article p {
         position: relative;
+    }
+    section.recipe article h3 {
+        position: relative;
+        left: -30px;
     }
 
 #posts-list {
