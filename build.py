@@ -4,9 +4,9 @@ import shutil
 from cooklang import Recipe
 
 
-SOURCE_DIR = 'src'
-BUILD_DIR = 'pelican/content'
-IMAGE_DIR = 'pelican/content/images'
+SOURCE_DIR = 'recipes'
+BUILD_DIR = 'content'
+IMAGE_DIR = 'content/images'
 
 
 def _purge_directory(directory: str) -> None:

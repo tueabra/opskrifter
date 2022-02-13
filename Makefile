@@ -6,7 +6,7 @@ BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
-PUBLISHCONF=$(BASEDIR)/publishconf.py
+PUBLISHCONF=$(CONFFIG)
 
 GITHUB_PAGES_BRANCH=gh-pages
 
@@ -48,6 +48,7 @@ help:
 	@echo '                                                                          '
 
 html:
+	python3 build.py
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
 clean:
