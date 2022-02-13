@@ -78,18 +78,19 @@ def main():
                     metadata['Image'] = imgpath.replace(SOURCE_DIR, '/images')
 
                 if recipe.ingredients:
-                    ingr = []
+                    ingr_q = []
+                    ingr_woq = []
                     for ingredient in recipe.ingredients:
                         if ingredient.quantity:
-                            ingr.append(
+                            ingr_q.append(
                                 f"{ingredient.quantity.amount} "
                                 f"{ingredient.quantity.unit or ''}"
                                 f" {ingredient.name}"
                             )
                         else:
-                            ingr.append(ingredient.name)
-                    if ingr:
-                        metadata['Ingredients'] = ';'.join(ingr)
+                            ingr_woq.append(ingredient.name)
+                    if ingr_q or ingr_woq:
+                        metadata['Ingredients'] = ';'.join(ingr_q + ingr_woq)
 
                 if metadata:
                     fh.write("---\n")
@@ -104,12 +105,6 @@ def main():
                 for step in steps:
                     fh.write(f"\n{step}\n")
 
-
-# TODO: cooklang bugs
-#  * kommentarer bliver ikke håndteret - heller ikke block comments
-#  * URLs ser ud til at blive truncated
-#  * tider bliver ikke håndteret
-#  * udstyr bliver ikke håndteret
 
 if __name__ == '__main__':
     main()
