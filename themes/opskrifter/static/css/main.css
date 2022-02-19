@@ -103,12 +103,13 @@ section {
 
 header {
     width: 100%;
-    height: 300px;
+    min-height: 80px;
     position: relative;
 }
     header img {
         width: 100%;
-        height: 100%;
+        height: 30vh;
+        max-height: 300px;
         object-fit: cover;
         object-position: 50% 50%;
     }
@@ -120,7 +121,8 @@ header {
         bottom: -20px;
         left: 50%;
         transform: translateX(-50%);
-        width: 600px;
+        width: 80vw;
+        max-width: 600px;
         margin: auto;
         opacity: 0.9;
         border-radius: 15px;
@@ -141,6 +143,16 @@ header {
 
     header .title ul li a {
         color: white;
+    }
+    @media only screen and (max-width: 1100px) {
+        header .title h1 {
+            font-size: 1.8em;
+        }
+    }
+    @media only screen and (max-width: 800px) {
+        header .title h1 {
+            font-size: 1.6em;
+        }
     }
 
 section.recipe {
@@ -170,6 +182,18 @@ section.recipe {
     section.recipe article h3 {
         position: relative;
         left: -30px;
+    }
+    @media only screen and (max-width: 1100px) {
+    }
+    @media only screen and (max-width: 800px) {
+        section.recipe {
+            flex-direction: column;
+        }
+        section.recipe aside {
+            border-right-width: 0;
+            border-bottom: #dedede solid 1px;
+            padding-left: 20vw;
+        }
     }
 
 #posts-list {
@@ -214,6 +238,26 @@ section.recipe {
         display: flex;
         flex-direction: column;
     }
-    #posts-list span {
+    #posts-list p {
         flex-grow: 1;
+    }
+    @media only screen and (max-width: 1100px) {
+        #posts-list li h1 {
+            font-size: 1.8em;
+            flex-grow: 1;
+        }
+        #posts-list li p {
+            display: none;
+        }
+        #posts-list li i {
+            text-align: right;
+        }
+        #posts-list li a > img {
+            width: 40%;
+        }
+    }
+    @media only screen and (max-width: 800px) {
+        #posts-list li h1 {
+            font-size: 1.2em;
+        }
     }
