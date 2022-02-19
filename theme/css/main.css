@@ -4,7 +4,7 @@
 /***** Global *****/
 /* Body */
 body {
-    background: #f5f5f5;
+    background: #dee8f2;
     color: #000305;
     font-size: 87.5%; /* Base font size: 14px */
     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -69,7 +69,7 @@ li { margin-top: 0.5em;
 
 /* Main Nav */
 nav {
-	background: #3f3826;
+	background: #1f5473;
 	color: white;
 	font-size: 1.143em;
 	overflow: auto;
@@ -83,7 +83,7 @@ nav ul {list-style: none; margin: 0 auto; max-width: 800px;}
 nav li {float: left; display: inline; margin: 0;}
 
 nav a:link, nav a:visited {
-	color: #fff;
+	color: white;
 	display: inline-block;
 	height: 30px;
 	padding: 5px 1.5em;
@@ -91,7 +91,7 @@ nav a:link, nav a:visited {
 }
 nav a:hover, nav a:active,
 nav .active a:link, nav .active a:visited {
-	background: black;
+	background: #112e40;
 	color: #fff;
 	text-shadow: none !important;
 }
@@ -103,26 +103,29 @@ section {
 
 header {
     width: 100%;
-    height: 300px;
+    min-height: 120px;
     position: relative;
+    background-color: #338abf;
 }
     header img {
         width: 100%;
-        height: 100%;
+        height: 30vh;
+        max-height: 300px;
         object-fit: cover;
         object-position: 50% 50%;
+        display: block;
     }
 
     header .title {
-        background-color: #d3b437;
+        background-color: #b0313c;
         padding: 10px;
         position: absolute;
         bottom: -20px;
         left: 50%;
         transform: translateX(-50%);
-        width: 600px;
+        width: 80vw;
+        max-width: 600px;
         margin: auto;
-        opacity: 0.9;
         border-radius: 15px;
         color: white;
         text-align: center;
@@ -142,6 +145,16 @@ header {
     header .title ul li a {
         color: white;
     }
+    @media only screen and (max-width: 1100px) {
+        header .title h1 {
+            font-size: 1.8em;
+        }
+    }
+    @media only screen and (max-width: 800px) {
+        header .title h1 {
+            font-size: 1.6em;
+        }
+    }
 
 section.recipe {
     display: flex;
@@ -150,7 +163,7 @@ section.recipe {
     section.recipe aside {
         min-width: 250px;
         padding: 0 0 0 30px;
-        border-right: #dedede solid 1px;
+        border-right: #1f5473 solid 1px;
     }
     section.recipe article {
         padding: 0 30px 0 60px;
@@ -162,7 +175,7 @@ section.recipe {
         content: counter(paragraph) ". ";
         position: absolute;
         left: -30px;
-        color: gray;
+        color: #1f5473;
     }
     section.recipe article p {
         position: relative;
@@ -170,6 +183,18 @@ section.recipe {
     section.recipe article h3 {
         position: relative;
         left: -30px;
+    }
+    @media only screen and (max-width: 1100px) {
+    }
+    @media only screen and (max-width: 800px) {
+        section.recipe {
+            flex-direction: column;
+        }
+        section.recipe aside {
+            border-right-width: 0;
+            border-bottom: #1f5473 solid 1px;
+            padding-left: 15vw;
+        }
     }
 
 #posts-list {
@@ -189,7 +214,10 @@ section.recipe {
         left: 80px;
         right: 80px;
         content: "";
-        border-bottom: #dedede solid 1px;
+        border-bottom: #296f99 solid 1px;
+    }
+    #posts-list li h1 {
+        font-size: 1.8em;
     }
     #posts-list li a {
         display: flex;
@@ -200,7 +228,7 @@ section.recipe {
         color: inherit;
     }
     #posts-list li a:hover h1 {
-        color: #d3b437;
+        color: #b0313c;
     }
     #posts-list li a > img {
         width: 25%;
@@ -214,6 +242,25 @@ section.recipe {
         display: flex;
         flex-direction: column;
     }
-    #posts-list span {
+    #posts-list li i {
+        text-align: right;
+    }
+    #posts-list p {
         flex-grow: 1;
+    }
+    @media only screen and (max-width: 1100px) {
+        #posts-list li h1 {
+            flex-grow: 1;
+        }
+        #posts-list li p {
+            display: none;
+        }
+        #posts-list li a > img {
+            width: 40%;
+        }
+    }
+    @media only screen and (max-width: 800px) {
+        #posts-list li h1 {
+            font-size: 1.2em;
+        }
     }
