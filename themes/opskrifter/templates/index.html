@@ -1,32 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-
-<section>
-    <ul id="posts-list">
+{% block headline %}{% endblock %}
+<div id="posts-list">
     {% for article in articles_page.object_list %}
-        <li>
-            <a href="{{ SITEURL }}/{{ article.url }}">
-            <div>
-
-                <h1>{{ article.title }}</h1>
-
-                {{ article.summary }}
-
-                {% if article.tags %}
-                    <i>
-                        {% for tag in article.tags %}{{ tag | escape }}{% if not loop.last %},{% endif %} {% endfor %}
-                    </i>
-                {% endif %}
-
-            </div>
+        <a href="{{ SITEURL }}/{{ article.url }}">
             {% if article.metadata['image'] %}
                 <img src="{{ SITEURL }}{{ article.metadata['image']}}" />
+            {% else %}
+                <div class="img-placeholder"></div>
             {% endif %}
-            </a>
 
-        </li>
+            <h1>{{ article.title }}</h1>
+
+            {{ article.summary }}
+
+            {% if article.tags %}
+                <i>
+                    {% for tag in article.tags %}{{ tag | escape }}{% if not loop.last %},{% endif %} {% endfor %}
+                </i>
+            {% endif %}
+
+        </a>
     {% endfor %}
-    </ul>
-</section>
+</div>
 
 {% endblock content %}

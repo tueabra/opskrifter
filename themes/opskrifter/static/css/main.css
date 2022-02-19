@@ -78,27 +78,37 @@ nav {
 	padding: 0;
 	text-align: center;
 }
-
-nav ul {list-style: none; margin: 0 auto; max-width: 800px;}
-nav li {float: left; display: inline; margin: 0;}
-
-nav a:link, nav a:visited {
-	color: white;
-	display: inline-block;
-	height: 30px;
-	padding: 5px 1.5em;
-	text-decoration: none;
-}
-nav a:hover, nav a:active,
-nav .active a:link, nav .active a:visited {
-	background: #112e40;
-	color: #fff;
-	text-shadow: none !important;
-}
+    nav ul {
+        list-style: none;
+        margin: 0 auto;
+        max-width: 1500px;
+    }
+    nav li {
+        float: left;
+        display: inline;
+        margin: 0;
+    }
+    nav a:link, nav a:visited {
+        color: white;
+        display: inline-block;
+        height: 30px;
+        padding: 5px 1.5em;
+        text-decoration: none;
+    }
+    nav a:hover, nav a:active,
+    nav .active a:link, nav .active a:visited {
+        background: #112e40;
+        color: #fff;
+        text-shadow: none !important;
+    }
 
 section {
 	max-width: 1120px;
 	margin: 0 auto;
+}
+
+.tag-list-header {
+    margin: 10px;
 }
 
 header {
@@ -198,69 +208,75 @@ section.recipe {
     }
 
 #posts-list {
-    list-style: none;
-    margin: 10px 0 0 0;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
-    #posts-list li {
-        display: flex;
-        height: 120px;
-        margin: 0;
-        position: relative;
+    #posts-list a {
+        width: 13%;
         margin-bottom: 10px;
-    }
-    #posts-list li::after {
-        position: absolute;
-        bottom: -5px;
-        left: 80px;
-        right: 80px;
-        content: "";
-        border-bottom: #296f99 solid 1px;
-    }
-    #posts-list li h1 {
-        font-size: 1.8em;
-    }
-    #posts-list li a {
+        border: #cbcbcb solid 1px;
+        border-radius: 20px;
+        overflow: hidden;
         display: flex;
-        flex-grow: 1;
+        flex-direction: column;
         text-decoration: none;
+        background-color: #e9f3ff;
     }
-    #posts-list li a:hover {
+    #posts-list a:hover {
         color: inherit;
     }
-    #posts-list li a:hover h1 {
+    #posts-list a:hover h1 {
         color: #b0313c;
     }
-    #posts-list li a > img {
-        width: 25%;
+    #posts-list a > *:first-child {
+        height: 200px;
+    }
+    #posts-list img {
+        width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: 50% 50%;
     }
-    #posts-list li a > div {
-        flex-grow: 1;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
+    #posts-list .img-placeholder {
+        background-color: #338abf;
     }
-    #posts-list li i {
+    #posts-list h1 {
+        font-size: 1.3em;
+        padding: 10px;
+    }
+    #posts-list i {
         text-align: right;
+        padding: 0 10px 10px 0;
     }
     #posts-list p {
         flex-grow: 1;
+        padding: 0 10px;
+        margin: 0;
+    }
+    @media only screen and (max-width: 1900px) {
+        #posts-list a {
+            width: 15.5%;
+        }
+    }
+    @media only screen and (max-width: 1600px) {
+        #posts-list a {
+            width: 19%;
+        }
+    }
+    @media only screen and (max-width: 1300px) {
+        #posts-list a {
+            width: 24%;
+        }
     }
     @media only screen and (max-width: 1100px) {
-        #posts-list li h1 {
-            flex-grow: 1;
-        }
-        #posts-list li p {
-            display: none;
-        }
-        #posts-list li a > img {
-            width: 40%;
+        #posts-list a {
+            width: 32%;
         }
     }
     @media only screen and (max-width: 800px) {
-        #posts-list li h1 {
-            font-size: 1.2em;
+        #posts-list a {
+            width: 48%;
         }
     }
