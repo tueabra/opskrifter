@@ -194,6 +194,9 @@ section.recipe {
     }
     section.recipe aside dd {
         min-width: 40%;
+        max-width: 60%;
+        overflow: hidden;
+        text-overflow: ellipsis;
         flex-grow: 1;
     }
     section.recipe article {

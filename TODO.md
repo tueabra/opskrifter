@@ -1,8 +1,6 @@
 # TODO
 
  * Fix cooklang issues
-   * comments are not handled, neither normal nor comment blocks
-   * URLs seems to be truncted
    * Markdown headers in source has the first # removed
    * Timings are not handled
    * Equipment is not handled

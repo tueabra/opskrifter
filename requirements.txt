@@ -1,2 +1,2 @@
-git+https://github.com/luizribeiro/py-cooklang.git@main#egg=cooklang
+git+https://github.com/tueabra/py-cooklang.git@main#egg=cooklang
 pelican[markdown]
