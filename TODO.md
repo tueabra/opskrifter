@@ -10,7 +10,5 @@
  * Implement missing features
    * Show timings
    * Show equipment
-   * Show random metadata
- * Show summary/beskrivelse on article page
  * Better sizing on tables, suited for kitchen use
  * Header styling breaks with very few categories

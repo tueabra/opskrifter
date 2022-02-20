@@ -27,8 +27,19 @@
       <li>{{ ingredient }}</li>
       {% endfor %}
     </ul>
+    {% if article.metadata['metadata'] %}
+    <dl>
+
+      {% for meta in article.metadata['metadata'].split(";") %}
+          <dt>{{ meta.split("=", 1)[0]|capitalize }}:</dt>
+          <dd>{{ meta.split("=", 1)[1] }}</dd>
+      {% endfor %}
+    </dl>
+
+    {% endif %}
   </aside>
   <article>
+    <i>{{ article.summary }}</i>
     {{ article.content }}
   </article>
 </section>

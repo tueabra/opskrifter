@@ -122,9 +122,13 @@ def main():
                 document.index(name)
 
                 if 'tags' in recipe.metadata:
-                    metadata['Tags'] = recipe.metadata['tags']
+                    metadata['Tags'] = recipe.metadata.pop('tags')
                     document.index(metadata['Tags'])
-                metadata['Summary'] = recipe.metadata.get('beskrivelse', name)
+
+                if 'beskrivelse' in recipe.metadata:
+                    metadata['Summary'] = recipe.metadata.pop('beskrivelse')
+                else:
+                    metadata['Summary'] = ''
 
                 imgpath = src.replace('.cook', '.jpg')
                 if os.path.exists(imgpath):
@@ -151,6 +155,11 @@ def main():
                             ingr_woq.append(ingredient.name)
                     if ingr_q or ingr_woq:
                         metadata['Ingredients'] = ';'.join(ingr_q + ingr_woq)
+
+                # Store extra metadata
+                metadata['Metadata'] = ";".join(
+                    f"{key}={value}" for key, value in recipe.metadata.items()
+                )
 
                 if metadata:
                     fh.write("---\n")

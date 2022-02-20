@@ -12,7 +12,7 @@
 
             <h1>{{ article.title }}</h1>
 
-            {{ article.summary }}
+            {{ article.summary|default("<p></p>", true) }}
 
             {% if article.tags %}
                 <i>
