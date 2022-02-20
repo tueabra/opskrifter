@@ -53,7 +53,7 @@ function populate_search(results) {
         return;
     }
     searchresults.innerHTML = results.map(result => {
-        return `<li><a href="${result.url}">${result.name}</a></li>`;
+        return `<li><a href="${SITEURL}${result.url}">${result.name}</a></li>`;
     }).join('');
 }
 
