@@ -11,4 +11,4 @@ DEFAULT_PAGINATION = False
 
 DEFAULT_DATE = 'fs'
 THEME = 'themes/opskrifter'
-STATIC_PATHS = ['search-data.json']
+STATIC_PATHS = ['images', 'search-data.json']
