@@ -10,21 +10,21 @@ from pelican.settings import DEFAULT_CONFIG
 from pelican.urlwrappers import URLWrapper
 
 
-SOURCE_DIR = 'recipes'
-BUILD_DIR = 'content'
-IMAGE_DIR = 'content/images'
-SEARCH_ENGINE_DATA = 'content/search-data.json'
+SOURCE_DIR = "recipes"
+BUILD_DIR = "content"
+IMAGE_DIR = "content/images"
+SEARCH_ENGINE_DATA = "content/search-data.json"
 
 
 @dataclass
 class SearchEngine:
     documents: list = dataclasses.field(default_factory=list)
 
-    STOP_WORDS = ['på', 'om', 'i', 'med', 'smp', 'og', 'uden']
+    STOP_WORDS = ["på", "om", "i", "med", "smp", "og", "uden"]
 
     @staticmethod
     def tokenize(text: str):
-        tokens = [SearchEngine.clean_string(part) for part in text.split(' ')]
+        tokens = [SearchEngine.clean_string(part) for part in text.split(" ")]
         return [t for t in tokens if t and t not in SearchEngine.STOP_WORDS]
 
     @staticmethod
@@ -35,9 +35,7 @@ class SearchEngine:
         self.documents.append(document)
 
     def serialize(self) -> str:
-        return json.dumps([
-            dataclasses.asdict(document) for document in self.documents
-        ])
+        return json.dumps([dataclasses.asdict(document) for document in self.documents])
 
 
 @dataclass
@@ -61,7 +59,7 @@ def urlify(string: str) -> str:
 def _purge_directory(directory: str) -> None:
     for dirname, _, filenames in list(os.walk(directory))[::-1]:
         for filename in filenames:
-            if not filename.startswith('.'):
+            if not filename.startswith("."):
                 os.remove(os.path.join(dirname, filename))
         if dirname != directory:
             os.rmdir(dirname)
@@ -89,30 +87,29 @@ def main():
     for dirname, _, filenames in os.walk(SOURCE_DIR):
         for filename in filenames:
 
-            if not filename.endswith('.cook'):
+            if not filename.endswith(".cook"):
                 continue
 
             src = os.path.join(dirname, filename)
 
-            with open(src, 'r') as fh:
+            with open(src, "r") as fh:
                 recipe = Recipe.parse(fh.read())
 
             target = os.path.join(
                 BUILD_DIR,
-                dirname[len(SOURCE_DIR)+1:],
-                filename.replace('.cook', '.md'))
+                dirname[len(SOURCE_DIR) + 1 :],
+                filename.replace(".cook", ".md"),
+            )
 
             _ensure_file_directory(target)
 
-            with open(target, 'w+') as fh:
-                metadata = {
-                    'Category': dirname[len(SOURCE_DIR)+1:]
-                }
+            with open(target, "w+") as fh:
+                metadata = {"Category": dirname[len(SOURCE_DIR) + 1 :]}
 
-                name = filename.replace('.cook', '').replace('-', ' ')
-                if 'name' in recipe.metadata:
-                    name = recipe.metadata.pop('name')
-                metadata['Title'] = name
+                name = filename.replace(".cook", "").replace("-", " ")
+                if "name" in recipe.metadata:
+                    name = recipe.metadata.pop("name")
+                metadata["Title"] = name
 
                 document = Document(
                     name=name,
@@ -121,24 +118,26 @@ def main():
                 search_data.add_document(document)
                 document.index(name)
 
-                if 'tags' in recipe.metadata:
-                    metadata['Tags'] = recipe.metadata.pop('tags')
-                    document.index(metadata['Tags'])
+                if "tags" in recipe.metadata:
+                    metadata["Tags"] = recipe.metadata.pop("tags")
+                    document.index(metadata["Tags"])
 
-                if 'beskrivelse' in recipe.metadata:
-                    metadata['Summary'] = recipe.metadata.pop('beskrivelse')
+                if "beskrivelse" in recipe.metadata:
+                    metadata["Summary"] = recipe.metadata.pop("beskrivelse")
                 else:
-                    metadata['Summary'] = ''
+                    metadata["Summary"] = ""
 
-                imgpath = src.replace('.cook', '.jpg')
+                imgpath = src.replace(".cook", ".jpg")
                 if os.path.exists(imgpath):
-                    imagetarget = target.replace('.md', '.jpg').replace(BUILD_DIR, IMAGE_DIR)
+                    imagetarget = target.replace(".md", ".jpg").replace(
+                        BUILD_DIR, IMAGE_DIR
+                    )
                     _ensure_file_directory(imagetarget)
                     shutil.copyfile(
-                        src.replace('.cook', '.jpg'),
+                        src.replace(".cook", ".jpg"),
                         imagetarget,
                     )
-                    metadata['Image'] = imgpath.replace(SOURCE_DIR, 'images')
+                    metadata["Image"] = imgpath.replace(SOURCE_DIR, "images")
 
                 if recipe.ingredients:
                     ingr_q = []
@@ -154,10 +153,10 @@ def main():
                         else:
                             ingr_woq.append(ingredient.name)
                     if ingr_q or ingr_woq:
-                        metadata['Ingredients'] = ';'.join(ingr_q + ingr_woq)
+                        metadata["Ingredients"] = ";".join(ingr_q + ingr_woq)
 
                 # Store extra metadata
-                metadata['Metadata'] = ";".join(
+                metadata["Metadata"] = ";".join(
                     f"{key}={value}" for key, value in recipe.metadata.items()
                 )
 
@@ -168,15 +167,15 @@ def main():
                     fh.write("---\n")
 
                 # Clean steps for comments
-                steps = [s.split('--')[0].strip() for s in recipe.steps]
+                steps = [s.split("--")[0].strip() for s in recipe.steps]
                 steps = [s for s in steps if s]
 
                 for step in steps:
                     fh.write(f"\n{step}\n")
 
-    with open(SEARCH_ENGINE_DATA, 'w+') as fh:
+    with open(SEARCH_ENGINE_DATA, "w+") as fh:
         fh.write(search_data.serialize())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

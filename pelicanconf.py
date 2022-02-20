@@ -1,14 +1,14 @@
-AUTHOR = ''
-SITENAME = 'Opskrifter'
-SITEURL = ''
+AUTHOR = ""
+SITENAME = "Opskrifter"
+SITEURL = ""
 
-PATH = 'content'
+PATH = "content"
 
-TIMEZONE = 'Europe/Copenhagen'
+TIMEZONE = "Europe/Copenhagen"
 
-DEFAULT_LANG = 'da'
+DEFAULT_LANG = "da"
 DEFAULT_PAGINATION = False
 
-DEFAULT_DATE = 'fs'
-THEME = 'themes/opskrifter'
-STATIC_PATHS = ['images', 'search-data.json']
+DEFAULT_DATE = "fs"
+THEME = "themes/opskrifter"
+STATIC_PATHS = ["images", "search-data.json"]
