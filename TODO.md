@@ -12,3 +12,4 @@
    * Show equipment
    * Show random metadata
  * Show summary/beskrivelse on article page
+ * Better sizing on tables, suited for kitchen use
