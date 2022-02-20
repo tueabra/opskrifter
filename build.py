@@ -134,7 +134,7 @@ def main():
                         src.replace('.cook', '.jpg'),
                         imagetarget,
                     )
-                    metadata['Image'] = imgpath.replace(SOURCE_DIR, '/images')
+                    metadata['Image'] = imgpath.replace(SOURCE_DIR, 'images')
 
                 if recipe.ingredients:
                     ingr_q = []

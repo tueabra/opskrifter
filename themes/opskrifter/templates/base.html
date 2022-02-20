@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/{{ CSS_FILE }}" />
         {% block extra_head %}{% endblock extra_head %}
         {% endblock head %}
+        <script>
+            const SITEURL = '{{ SITEURL }}';
+        </script>
 </head>
 
 <body>
