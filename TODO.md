@@ -8,4 +8,3 @@
    * Show timings
    * Show equipment
  * Better sizing on tables, suited for kitchen use
- * Header styling breaks with very few categories

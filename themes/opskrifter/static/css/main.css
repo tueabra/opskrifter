@@ -113,7 +113,6 @@ section {
 
 header {
     width: 100%;
-    min-height: 120px;
     position: relative;
     background-color: #338abf;
 }
@@ -129,17 +128,24 @@ header {
     header .title {
         background-color: #b0313c;
         padding: 10px;
-        position: absolute;
-        bottom: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80vw;
-        max-width: 600px;
-        margin: auto;
-        border-radius: 15px;
         color: white;
         text-align: center;
         font-style: italic;
+    }
+    @media only screen and (min-width: 1100px) {
+        header {
+            min-height: 120px;
+        }
+        header .title {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 15px;
+        }
     }
 
     header .title ul {
@@ -158,6 +164,10 @@ header {
     @media only screen and (max-width: 1100px) {
         header .title h1 {
             font-size: 1.8em;
+        }
+        header img {
+            height: 20vh;
+            max-height: 200px;
         }
     }
     @media only screen and (max-width: 800px) {
@@ -315,6 +325,7 @@ section.recipe {
     padding: 3px;
     border-radius: 3px;
     margin-top: 5px;
+    margin-right: 10px;
 }
 
 #search-results {
