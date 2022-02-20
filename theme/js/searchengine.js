@@ -1,6 +1,6 @@
 let search_data = undefined;
 async function fetch_data() {
-  await fetch('/search-data.json')
+  await fetch(`${SITEURL}/search-data.json`)
     .then(response => response.json())
     .then(data => search_data = data)
     .catch(error => alert(error));
