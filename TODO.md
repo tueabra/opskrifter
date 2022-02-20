@@ -1,7 +1,6 @@
 # TODO
 
  * Fix cooklang issues
-   * Markdown headers in source has the first # removed
    * Timings are not handled
    * Equipment is not handled
    * Is servings properly implemented?
