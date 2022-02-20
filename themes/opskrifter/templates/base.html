@@ -25,10 +25,16 @@
         <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
     {% endfor %}
     {% endif %}
+    <li style="float: right; position: relative;">
+        <input type="text" id="search-box" placeholder="Søg her..." />
+    </li>
     </ul></nav>
 
     {% block content %}
     {% endblock %}
+
+    <ul id="search-results"></ul>
+    <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/searchengine.js"></script>
 
 </body>
 </html>

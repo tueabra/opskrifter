@@ -11,5 +11,4 @@
    * Show timings
    * Show equipment
    * Show random metadata
- * Simple search engine
  * Show summary/beskrivelse on article page

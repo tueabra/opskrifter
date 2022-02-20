@@ -1,12 +1,61 @@
+from re import search
+import dataclasses
+from dataclasses import dataclass
+import json
 import os
 import shutil
 
 from cooklang import Recipe
+from pelican.settings import DEFAULT_CONFIG
+from pelican.urlwrappers import URLWrapper
 
 
 SOURCE_DIR = 'recipes'
 BUILD_DIR = 'content'
 IMAGE_DIR = 'content/images'
+SEARCH_ENGINE_DATA = 'content/search-data.json'
+
+
+@dataclass
+class SearchEngine:
+    documents: list = dataclasses.field(default_factory=list)
+
+    STOP_WORDS = ['på', 'om', 'i', 'med', 'smp', 'og', 'uden']
+
+    @staticmethod
+    def tokenize(text: str):
+        tokens = [SearchEngine.clean_string(part) for part in text.split(' ')]
+        return [t for t in tokens if t and t not in SearchEngine.STOP_WORDS]
+
+    @staticmethod
+    def clean_string(text: str):
+        return text.lower().strip()
+
+    def add_document(self, document: "Document") -> None:
+        self.documents.append(document)
+
+    def serialize(self) -> str:
+        return json.dumps([
+            dataclasses.asdict(document) for document in self.documents
+        ])
+
+
+@dataclass
+class Document:
+    url: str
+    name: str
+    tokens: list[str] = dataclasses.field(default_factory=list)
+
+    def index(self, text: str) -> None:
+        self.tokens += SearchEngine.tokenize(text)
+
+
+def urlify(string: str) -> str:
+    """Generate Pelican URL for the given string."""
+    # This is a very generous hack, that relies on no special configuration for our setup.
+    # It also doesn't use the pelican source precisely as they do, but it works for now.
+    wrapper = URLWrapper(string, DEFAULT_CONFIG)
+    return f"/{wrapper.slug}.html"
 
 
 def _purge_directory(directory: str) -> None:
@@ -34,6 +83,8 @@ def clean_build():
 
 def main():
     clean_build()
+
+    search_data = SearchEngine()
 
     for dirname, _, filenames in os.walk(SOURCE_DIR):
         for filename in filenames:
@@ -63,8 +114,16 @@ def main():
                     name = recipe.metadata.pop('name')
                 metadata['Title'] = name
 
+                document = Document(
+                    name=name,
+                    url=urlify(name),
+                )
+                search_data.add_document(document)
+                document.index(name)
+
                 if 'tags' in recipe.metadata:
                     metadata['Tags'] = recipe.metadata['tags']
+                    document.index(metadata['Tags'])
                 metadata['Summary'] = recipe.metadata.get('beskrivelse', name)
 
                 imgpath = src.replace('.cook', '.jpg')
@@ -81,6 +140,7 @@ def main():
                     ingr_q = []
                     ingr_woq = []
                     for ingredient in recipe.ingredients:
+                        document.index(ingredient.name)
                         if ingredient.quantity:
                             ingr_q.append(
                                 f"{ingredient.quantity.amount} "
@@ -104,6 +164,9 @@ def main():
 
                 for step in steps:
                     fh.write(f"\n{step}\n")
+
+    with open(SEARCH_ENGINE_DATA, 'w+') as fh:
+        fh.write(search_data.serialize())
 
 
 if __name__ == '__main__':
