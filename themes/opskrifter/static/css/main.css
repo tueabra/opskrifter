@@ -333,6 +333,7 @@ section.recipe {
     position: fixed;
     right: 0;
     width: 400px;
+    max-width: 90vw;
     top: 40px;
     bottom: 0;
     background-color: #396f8e;
