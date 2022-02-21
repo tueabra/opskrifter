@@ -127,17 +127,18 @@ def main():
                 else:
                     metadata["Summary"] = ""
 
-                imgpath = src.replace(".cook", ".jpg")
-                if os.path.exists(imgpath):
-                    imagetarget = target.replace(".md", ".jpg").replace(
-                        BUILD_DIR, IMAGE_DIR
-                    )
-                    _ensure_file_directory(imagetarget)
-                    shutil.copyfile(
-                        src.replace(".cook", ".jpg"),
-                        imagetarget,
-                    )
-                    metadata["Image"] = imgpath.replace(SOURCE_DIR, "images")
+                for extension in (".jpg", ".png"):
+                    imgpath = src.replace(".cook", extension)
+                    if os.path.exists(imgpath):
+                        imagetarget = target.replace(".md", extension).replace(
+                            BUILD_DIR, IMAGE_DIR
+                        )
+                        _ensure_file_directory(imagetarget)
+                        shutil.copyfile(
+                            src.replace(".cook", extension),
+                            imagetarget,
+                        )
+                        metadata["Image"] = imgpath.replace(SOURCE_DIR, "images")
 
                 if recipe.ingredients:
                     ingr_q = []
